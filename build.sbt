@@ -13,6 +13,7 @@ def junitVersion = "4.13"
 def gcp = "com.google.cloud" % "google-cloud-storage" % "1.106.0"
 inThisBuild(
   List(
+    version := "0.6.0-M1",
     version ~= { old =>
       if ("true" == System.getProperty("CI") && old.contains("+0-")) {
         old.replaceAll("\\+0-.*", "")
@@ -177,7 +178,13 @@ lazy val munit = crossProject(JSPlatform, JVMPlatform, NativePlatform)
     )
   )
   .jvmConfigure(_.dependsOn(junit))
+import xerial.sbt.Sonatype._
 lazy val munitJVM = munit.jvm
+  .settings(
+    organization := "com.sandinh",
+    publishTo := sonatypePublishToBundle.value,
+    sonatypeProjectHosting := Some(GitHubHosting("giabao", "munit", "thanhbv@sandinh.net")),
+  )
 lazy val munitJS = munit.js
 lazy val munitNative = munit.native
 
