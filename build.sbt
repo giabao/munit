@@ -1,5 +1,4 @@
 import sbtcrossproject.CrossPlugin.autoImport.crossProject
-import sbtcrossproject.CrossPlugin.autoImport.CrossType
 import scala.collection.mutable
 val customScalaJSVersion = Option(System.getenv("SCALAJS_VERSION"))
 val scalaJSVersion = customScalaJSVersion.getOrElse("1.0.1")
@@ -7,6 +6,7 @@ val scalaNativeVersion = "0.4.0-M2"
 def scala213 = "2.13.3"
 def scala212 = "2.12.12"
 def scala211 = "2.11.12"
+def dottyNightly = System.getProperty("dotty.nightly", "0.26.0-bin-20200721-324420c-NIGHTLY")
 def dottyNext = "0.25.0-RC2"
 def dottyStable = "0.24.0"
 def junitVersion = "4.13"
@@ -51,7 +51,7 @@ skip in publish := true
 crossScalaVersions := List()
 val isPreScala213 = Set[Option[(Long, Long)]](Some((2, 11)), Some((2, 12)))
 val scala2Versions = List(scala213, scala212, scala211)
-val scala3Versions = List(dottyNext, dottyStable)
+val scala3Versions = List(dottyNightly, dottyNext, dottyStable)
 val allScalaVersions = scala2Versions ++ scala3Versions
 def isNotScala211(v: Option[(Long, Long)]): Boolean = !v.contains((2, 11))
 def isScala2(v: Option[(Long, Long)]): Boolean = v.exists(_._1 == 2)
