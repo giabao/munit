@@ -13,6 +13,7 @@ def junitVersion = "4.13"
 def gcp = "com.google.cloud" % "google-cloud-storage" % "1.107.0"
 inThisBuild(
   List(
+    scalafixScalaBinaryVersion := scalaBinaryVersion.value,
     version ~= { old =>
       if ("true" == System.getProperty("CI") && old.contains("+0-")) {
         old.replaceAll("\\+0-.*", "")
@@ -48,14 +49,6 @@ inThisBuild(
 
 skip in publish := true
 crossScalaVersions := List()
-addCommandAlias(
-  "scalafixAll",
-  "; ++2.12.10 ; scalafixEnable ; all scalafix test:scalafix"
-)
-addCommandAlias(
-  "scalafixCheckAll",
-  "; ++2.12.10 ;  scalafixEnable ; scalafix --check ; test:scalafix --check"
-)
 val isPreScala213 = Set[Option[(Long, Long)]](Some((2, 11)), Some((2, 12)))
 val scala2Versions = List(scala213, scala212, scala211)
 val scala3Versions = List(dottyNext, dottyStable)
