@@ -4,10 +4,10 @@ import scala.collection.mutable
 val customScalaJSVersion = Option(System.getenv("SCALAJS_VERSION"))
 val scalaJSVersion = customScalaJSVersion.getOrElse("1.0.1")
 val scalaNativeVersion = "0.4.0-M2"
-def scala213 = "2.13.2"
-def scala212 = "2.12.11"
+def scala213 = "2.13.3"
+def scala212 = "2.12.12"
 def scala211 = "2.11.12"
-def dottyNext = "0.25.0-RC1"
+def dottyNext = "0.25.0-RC2"
 def dottyStable = "0.24.0"
 def junitVersion = "4.13"
 def gcp = "com.google.cloud" % "google-cloud-storage" % "1.107.0"
