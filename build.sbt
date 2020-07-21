@@ -17,6 +17,8 @@ inThisBuild(
     version ~= { old =>
       if ("true" == System.getProperty("CI") && old.contains("+0-")) {
         old.replaceAll("\\+0-.*", "")
+      } else if ("true" == System.getProperty("stripSNAPSHOT")) {
+        old.stripSuffix("-SNAPSHOT")
       } else {
         old
       }
