@@ -49,6 +49,14 @@ inThisBuild(
   )
 )
 
+addCommandAlias(
+  "dottyPublishLocal", {
+    Seq(munitJVM, munitScalacheckJVM, junit, plugin)
+      .map(p => s";${p.id}/publishLocal")
+      .mkString(s";++$dottyNightly;testsJVM/test", "", "")
+  }
+)
+
 skip in publish := true
 crossScalaVersions := List()
 val isPreScala213 = Set[Option[(Long, Long)]](Some((2, 11)), Some((2, 12)))
